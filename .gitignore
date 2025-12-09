@@ -13,6 +13,7 @@
 #    Python    #
 ################
 *.py[cod]
+venv/
 # setup.py working directory
 build
 # sphinx build directory
