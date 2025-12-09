@@ -29,10 +29,9 @@ def plotPZ(H, color='b', markersize=5, showlist=False):
     """
     
     z, p, _ = _get_zpk(H)
-    p = np.real_if_close(np.round(p, 5))
-    z = np.real_if_close(np.round(z, 5))
-    p= np.real_if_close(p, tol=1e-5)
-    z= np.real_if_close(z, tol=1e-5)
+    p = np.real_if_close(np.round(p, 5)) # type: ignore
+    z = np.real_if_close(np.round(z, 5)) # type: ignore
+
 
     pole_fmt = {'marker': 'x', 'markersize': markersize}
     zero_fmt = {'marker': 'o', 'markersize': markersize}
@@ -55,7 +54,7 @@ def plotPZ(H, color='b', markersize=5, showlist=False):
 
     # Plot unit circle
     circle = np.exp(2j * np.pi * np.linspace(0, 1, 100))
-    plt.plot(circle.real, circle.imag)
+    plt.plot(circle.real, circle.imag) # type: ignore
 
     ax = plt.gca()
     ax.set_autoscale_on(False)
@@ -70,7 +69,7 @@ def plotPZ(H, color='b', markersize=5, showlist=False):
 
         ps = p[p.imag >= 0]
         for pi in ps:
-            markers.append(plt.Line2D((), (), linestyle='None', **pole_fmt))
+            markers.append(plt.Line2D((), (), linestyle='None', **pole_fmt)) # type: ignore
             if np.allclose(pi.imag, 0, atol=1e-5):
                 descr.append('%+.4f' % pi.real)
             else:
@@ -78,7 +77,7 @@ def plotPZ(H, color='b', markersize=5, showlist=False):
 
         if len(z) > 0:
             for zi in z[z.imag >= 0]:
-                markers.append(plt.Line2D((), (), linestyle='None', **zero_fmt))
+                markers.append(plt.Line2D((), (), linestyle='None', **zero_fmt)) # type: ignore
                 if np.allclose(zi.imag, 0, atol=1e-5):
                     descr.append('%+.4f' % zi.real)
                 else:
